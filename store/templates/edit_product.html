@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4">Edit Product</h3>
+
+<div class="col-md-6">
+    <div class="card shadow p-4">
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>Name</label>
+            <input type="text" name="name" value="{{ product.name }}" class="form-control mb-3">
+
+            <label>Price</label>
+            <input type="number" name="price" value="{{ product.price }}" class="form-control mb-3">
+
+            <label>Stock</label>
+            <input type="number" name="stock" value="{{ product.stock }}" class="form-control mb-3">
+
+            <label>Description</label>
+            <textarea name="description" class="form-control mb-3">{{ product.description }}</textarea>
+
+            <label>Current Image</label><br>
+            
+             {% if product.image %}
+                <img src="{{ product.image.url }}" width="100">
+                {% endif %}
+
+            <label>Change Image</label>
+            <input type="file" name="image" class="form-control mb-3">
+
+            <button class="btn btn-warning w-100">Update Product</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

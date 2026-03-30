@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | ShopEase</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #111, #444);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /*  BRAND */
+        .brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        /*  CARD */
+        .register-card {
+            border-radius: 15px;
+            width: 100%;
+        }
+
+        /*  INPUT */
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #000;
+        }
+
+        /*  BUTTON */
+        .btn-custom {
+            border-radius: 8px;
+            background: black;
+            color: white;
+        }
+
+        .btn-custom:hover {
+            background: #333;
+        }
+
+        /*  MOBILE FIX */
+        @media (max-width: 576px) {
+            .brand {
+                position: static;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--  BRAND -->
+    <div class="brand">ShopEase</div>
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="card register-card shadow-lg p-4">
+
+                    <!-- Title -->
+                    <div class="text-center mb-3">
+                        <h3 class="fw-bold">Create Account 🛍️</h3>
+                        <p class="text-muted">Join ShopEase today</p>
+                    </div>
+
+                    <!-- Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- FORM -->
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm password" required>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-custom w-100">
+                            <i class="bi bi-person-plus"></i> Register
+                        </button>
+                    </form>
+
+                    <!-- LOGIN -->
+                    <div class="text-center mt-3">
+                        <small>
+                            Already have an account?
+                            <a href="{% url 'login' %}" class="fw-bold text-decoration-none">
+                                Login
+                            </a>
+                        </small>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3>Add Product</h3>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<input name="name" class="form-control mb-2" placeholder="Name">
+<input name="price" class="form-control mb-2" placeholder="Price">
+<input name="stock" class="form-control mb-2" placeholder="Stock">
+
+<textarea name="description" class="form-control mb-2"></textarea>
+
+<input name="category" class="form-control mb-2" placeholder="Category">
+
+<label>Main Image</label>
+<input type="file" name="image" class="form-control mb-2">
+
+<label>Gallery Images</label>
+<input type="file" name="images" multiple class="form-control mb-3">
+
+<button class="btn btn-success">Add</button>
+
+</form>
+
+{% endblock %}

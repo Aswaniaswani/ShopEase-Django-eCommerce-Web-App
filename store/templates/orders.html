@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h3 class="mb-4">My Orders</h3>
+
+{% for order in orders %}
+<div class="card p-3 mb-3 shadow-sm">
+    {% for item in order.items.all %} <p><strong>Product:</strong> {{ item.product.name }}</p> {% endfor %}
+ 
+    <p>Total: ₹{{ order.total_price }}</p>
+
+    <p>Status: <strong>{{ order.status }}</strong></p>
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+            <span class="text-success">✔ Placed</span>
+            <span class="text-warning">✔ Processing</span>
+            <span class="text-info">🚚 Shipped</span>
+            <span class="text-muted">📦 Delivered</span>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div>
+            {% if order.status == 'Placed' or order.status == 'Processing' %}
+                <a href="{% url 'cancel_order' order.id %}" 
+                   class="btn btn-danger btn-sm">
+                   Cancel
+                </a>
+            {% endif %}
+
+            {% if order.status == 'Delivered' %}
+                <a href="{% url 'return_order' order.id %}" 
+                   class="btn btn-warning btn-sm">
+                   Return
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% empty %}
+<h5>No orders found</h5>
+{% endfor %}
+
+{% endblock %}
